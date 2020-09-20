@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const { hook } = require('module-hook');
 const path = require('path');
 
