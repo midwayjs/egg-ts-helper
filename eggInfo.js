@@ -7,7 +7,7 @@ const tslib_1 = require("tslib");
 require("cache-require-paths");
 const fs_1 = tslib_1.__importDefault(require("fs"));
 const path_1 = tslib_1.__importDefault(require("path"));
-const config_1 = require("../config");
+const config_1 = require("egg-ts-helper/dist/config");
 const utils = tslib_1.__importStar(require("egg-ts-helper/dist/utils"));
 const cwd = process.cwd();
 const eggInfo = {};
