@@ -62,3 +62,7 @@ const indexPath = path.join(process.cwd(), 'typings/app/index.d.ts');
 let data = fs.readFileSync(indexPath, 'utf-8');
 data = data.replace("export * from 'egg';", 'import \'@midwayjs/web\';\nexport * from \'egg\';');
 fs.writeFileSync(indexPath, data);
+
+const configIndexPath = path.join(process.cwd(), 'typings/config/index.d.ts');
+data = 'import \'@midwayjs/web\';';
+fs.writeFileSync(configIndexPath, data);
