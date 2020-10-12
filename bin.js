@@ -64,5 +64,6 @@ data = data.replace("export * from 'egg';", 'import \'@midwayjs/web\';\nexport *
 fs.writeFileSync(indexPath, data);
 
 const configIndexPath = path.join(process.cwd(), 'typings/config/index.d.ts');
-data = 'import \'@midwayjs/web\';';
+const configPluginPath = path.join(process.cwd(), 'typings/config/plugin.d.ts');
+data = fs.readFileSync(configPluginPath, 'utf-8').replace('import \'egg\';', 'import \'@midwayjs/web\';\nimport \'egg\';');
 fs.writeFileSync(configIndexPath, data);
