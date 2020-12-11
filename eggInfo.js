@@ -12,6 +12,8 @@ const utils = tslib_1.__importStar(require("egg-ts-helper/dist/utils"));
 const cwd = process.cwd();
 const eggInfo = {};
 const startTime = Date.now();
+const { dirname, join } = require('path');
+
 if (utils.checkMaybeIsTsProj(cwd)) {
   // only require ts-node in ts project
   require('ts-node/register');
@@ -64,7 +66,8 @@ function mockFn(obj, name, fn) {
   };
 }
 function getLoader(baseDir, framework) {
-  const frameworkPath = path_1.default.join(baseDir, 'node_modules', framework);
+  const dir = require.resolve(join(framework, 'package.json'));
+  const frameworkPath = dirname(dir);
   const eggCore = findEggCore(baseDir, frameworkPath);
   /* istanbul ignore if */
   if (!eggCore)
