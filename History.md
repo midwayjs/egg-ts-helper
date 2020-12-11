@@ -1,4 +1,10 @@
 
+1.0.4 / 2020-12-12
+==================
+
+  * Merge pull request #1 from midwayjs/fix_monorepo
+  * fix: generate d.ts in monorepo
+
 1.0.3 / 2020-10-12
 ==================
 
