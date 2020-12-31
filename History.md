@@ -1,4 +1,10 @@
 
+1.0.5 / 2020-12-31
+==================
+
+  * Merge pull request #2 from midwayjs/fix_context_emtpy
+  * fix: context value
+
 1.0.4 / 2020-12-12
 ==================
 
