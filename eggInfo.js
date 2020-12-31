@@ -89,6 +89,8 @@ function getLoader(baseDir, framework) {
     baseDir
   }
 
+  app.context = {};
+
   return new CustomLoader({
     baseDir: baseDir,
     logger: {
