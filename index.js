@@ -76,6 +76,22 @@ for (const framework of Array.from(frameworkSet))  {
   }
 }
 
+// find app plugin
+let appPlugin = safeRequire(path.join(process.cwd(), 'src/config/plugin'));
+if (appPlugin) {
+  if (appPlugin.default) {
+    appPlugin = appPlugin.default;
+  }
+  for (const key in appPlugin) {
+    if (typeof appPlugin[key] !== 'object') {
+      appPlugin[key] =  {
+        enable: true,
+      }
+    }
+  }
+  extend(true, pluginList, appPlugin);
+}
+
 // console.log(frameworkList)
 // console.log(pluginList)
 
