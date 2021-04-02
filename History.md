@@ -1,4 +1,11 @@
 
+1.1.0 / 2021-04-03
+==================
+
+  * chore:  support app plugin
+  * Merge pull request #3 from midwayjs/remove_egg
+  * refactor: remove  egg dep
+
 1.0.5 / 2020-12-31
 ==================
 
