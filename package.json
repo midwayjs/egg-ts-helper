@@ -18,16 +18,15 @@
   ],
   "files": [
     "bin.js",
-    "index.js",
-    "eggInfo.js"
+    "index.js"
   ],
   "author": "Harry Chen<czy88840616@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "egg-ts-helper": "^1.25.8"
+    "extend2": "^1.0.0",
+    "fs-extra": "^9.1.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  },
-  "devDependencies": {}
+  }
 }
