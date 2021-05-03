@@ -156,7 +156,7 @@ fs.writeFileSync(path.join(process.cwd(), 'typings/config/plugin.d.ts'), config_
 // 支持 extend 扩展
 const extendRoot = path.join(process.cwd(), 'src/app/extend');
 if (fs.existsSync(extendRoot)) {
-  fs.ensureDir(path.join(process.cwd(), `typings/app/extend/`));
+  fs.ensureDirSync(path.join(process.cwd(), `typings/app/extend/`));
   const extendMap = {
     Helper: 'IHelper',
     Request: 'Request',
