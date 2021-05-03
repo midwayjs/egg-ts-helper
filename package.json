@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git@github.com:midwayjs/egg-ts-helper.git"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "jest",
+    "cov": "jest --coverage"
+  },
   "keywords": [
     "midway",
     "egg",
@@ -28,5 +31,11 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   }
 }

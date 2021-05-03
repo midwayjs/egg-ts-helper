@@ -5,6 +5,11 @@ const path = require('path');
 const fs = require('fs-extra');
 const extend = require('extend2');
 
+const WARN_MSG = [
+  '// This file is created by egg-ts-helper',
+  '// Do not modify this file!!!!!!!!!',
+];
+
 function safeRequire(p, enabledCache = true) {
   if (p.startsWith(`.${path.sep}`) || p.startsWith(`..${path.sep}`)) {
     p = resolve(dirname(module.parent.filename), p);
@@ -100,8 +105,7 @@ fs.ensureFileSync(path.join(process.cwd(), 'typings/config/index.d.ts'));
 fs.ensureFileSync(path.join(process.cwd(), 'typings/config/plugin.d.ts'));
 
 let app_idx_tpl = [
-  '// This file is created by egg-ts-helper',
-  '// Do not modify this file!!!!!!!!!',
+  ...WARN_MSG,
 ];
 // import 'egg';
 // import '@midwayjs/web';
@@ -126,8 +130,7 @@ fs.writeFileSync(path.join(process.cwd(), 'typings/app/index.d.ts'), app_idx_tpl
 //   }
 // }
 let config_idx_tpl = [
-  '// This file is created by egg-ts-helper',
-  '// Do not modify this file!!!!!!!!!',
+  ...WARN_MSG,
 ];
 // 框架部分
 config_idx_tpl = config_idx_tpl.concat(frameworkList.map(framework => {
@@ -149,3 +152,41 @@ config_idx_tpl.push(`}`);
 fs.writeFileSync(path.join(process.cwd(), 'typings/config/index.d.ts'), config_idx_tpl.join('\r\n'));
 // 重复
 fs.writeFileSync(path.join(process.cwd(), 'typings/config/plugin.d.ts'), config_idx_tpl.join('\r\n'));
+
+// 支持 extend 扩展
+const extendRoot = path.join(process.cwd(), 'src/app/extend');
+if (fs.existsSync(extendRoot)) {
+  fs.ensureDir(path.join(process.cwd(), `typings/app/extend/`));
+  const extendMap = {
+    Helper: 'IHelper',
+    Request: 'Request',
+    Response: 'Response',
+    Application: 'Application',
+    Context: 'Context',
+  }
+  const dirs = fs.readdirSync(extendRoot);
+  for (const file of dirs) {
+    if (/^(application|context|helper|request|response)/.test(file)) {
+      const splits = file.split('.');
+      const filename = splits[0];
+      const filenameCamelCase = filename.charAt(0).toUpperCase() + filename.slice(1);
+      let env = '';
+      let envCamelCase = '';
+      if(splits.length === 3) {
+        // *.{env}.ts
+        env = splits[1];
+        envCamelCase = env.charAt(0).toUpperCase() + env.slice(1);
+      }
+      const extend_tpl = [
+        ...WARN_MSG,
+        `import 'egg';`,
+        `import Extend${envCamelCase}${filenameCamelCase} from '../../../src/app/extend/${file.replace('.ts', '')}';`,
+        `type Extend${envCamelCase}${filenameCamelCase}Type = typeof Extend${envCamelCase}${filenameCamelCase};`,
+        `declare module 'egg' {`,
+        `  interface ${extendMap[filenameCamelCase]} extends Extend${envCamelCase}${filenameCamelCase}Type { }`,
+        `}`,
+      ];
+      fs.writeFileSync(path.join(process.cwd(), `typings/app/extend/${file.replace('.ts', '')}.d.ts`), extend_tpl.join('\r\n'));
+    }
+  }
+}
