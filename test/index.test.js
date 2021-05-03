@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 
 describe('test/index.test.js', () => {
 
-  it('test generate typings', async () => {
+  it('test generate typings', () => {
     process.chdir(join(__dirname, 'fixtures'));
     require(join(__dirname, '../index'));
     // extend
@@ -19,6 +19,5 @@ describe('test/index.test.js', () => {
     //config
     expect(fs.existsSync(join(__dirname, 'fixtures/typings/config/index.d.ts')));
     expect(fs.existsSync(join(__dirname, 'fixtures/typings/config/plugin.d.ts')));
-    await fs.removeSync(join(__dirname, 'fixtures/typings'));
   });
 });
