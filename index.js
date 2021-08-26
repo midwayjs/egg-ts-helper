@@ -145,7 +145,7 @@ config_idx_tpl.push(`declare module 'egg' {`);
 config_idx_tpl.push(`  interface EggPlugin {`);
 // 插件key部分
 config_idx_tpl = config_idx_tpl.concat(Object.keys(pluginList).map(key => {
-  return `    ${key}?: EggPluginItem;`;
+  return `    '${key}'?: EggPluginItem;`;
 }));
 config_idx_tpl.push(`  }`);
 config_idx_tpl.push(`}`);
