@@ -1,6 +1,6 @@
 {
   "name": "@midwayjs/egg-ts-helper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "egg typescript helper for midway",
   "bin": {
     "ets": "bin.js"
